@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 화면</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginForm/loginForm.css}"/>
+    <style>
+
+
+    </style>
+
+    <script src="https://kit.fontawesome.com/79ef7aaf2e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/loginForm/emailVerify.js}"></script>
+    <script th:src="@{/js/loginForm/loginFormToggle.js}"></script>
+    <script th:src="@{/js/loginForm/passwordToggle.js}"></script>
+</head>
+<body>
+
+<div class="registration-container">
+    <div class="registration-header">
+        <h1>소셜 로그인</h1>
+        <div class="social-icons">
+            <a th:href="@{/oauth2/authorization/google}">
+                <img th:src="@{/images/google.jpeg}" alt="Google Logo" style="width: 80px; height: 80px;">
+                <span class="lastLoginGoogle" th:if="${session.lastLoginMethod == 'google'}">최근 로그인</span>
+            </a>
+            <a th:href="@{/oauth2/authorization/kakao}">
+                <img th:src="@{/images/kakao-사각아이콘.png}" alt="Kakao Logo" style="width: 80px; height: 80px;">
+                <span class="lastLoginKakao" th:if="${session.lastLoginMethod == 'kakao'}">최근 로그인</span>
+            </a>
+            <a th:href="@{/oauth2/authorization/naver}">
+                <img th:src="@{/images/naver-사각아이콘.png}" alt="Naver Logo" style="width: 80px; height: 80px;">
+                <span class="lastLoginNaver" th:if="${session.lastLoginMethod == 'naver'}">최근 로그인</span>
+            </a>
+    </div>
+
+
+        <div id="or">
+            <span class="or-line"></span> OR <span class="or-line"></span>
+        </div>
+    <span id="showHiddenDivButton"><h1>일반 로그인</h1></span>
+
+    <div id="hiddenDiv" style="display: none;">
+        <form id="signupForm" action="/loginProcessing" method="post" class="form-field">
+            <div>
+                <input id="emailInput" type="email" name="username" placeholder="이메일" required/>
+                <span id="emailStatus"></span>
+            </div>
+            <div class="mainPassword">
+                <input class="password" type="password" name="password" placeholder="비밀번호" required/>
+                <div class="eyes">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </div>
+            </div>
+
+            <button class="submit-button" type="submit">로그인하기</button>
+        </form>
+    </div>
+    <div>
+        <div class="or-text">계정이 없으신가요? <a th:href="@{/signup}">회원가입을 해주세요!</a></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

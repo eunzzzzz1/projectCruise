@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cruise.project_cruise.mapper.UserMapper">
+    <!-- TemplateMapper 지우고 자기 매퍼이름을 기입해주세요 -->
+
+    <!--    id에는 MapperInterface의 메소드 이름을 기입합니다.-->
+    <!--    resultType에는 그 메소드의 반환값 타입을 입력해줍니다.-->
+    <select id="selectEmail"  parameterType="com.cruise.project_cruise.dto.UserDTO" resultType="java.lang.String">
+        select email from users where email=#{email}
+    </select>
+    <select id="selectSocialInfo" parameterType="java.lang.String" resultType="com.cruise.project_cruise.dto.UserDTO">
+
+        select * from users where provider_id=#{provider_id}
+    </select>
+
+    <select id="selectPassWord" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_password from users where email=#{email}
+    </select>
+
+    <insert id="insertSocialUser" parameterType="com.cruise.project_cruise.dto.UserDTO">
+
+        insert into users (email,email_verified,provider,provider_id) values (#{email}, #{email_verified}, #{provider}, #{provider_id})
+    </insert>
+
+    <insert id="insertNormalUser" parameterType="com.cruise.project_cruise.dto.UserDTO">
+        insert into users (email,email_verified,user_password,user_name,provider,tel,address1,address2) values (#{email}, #{email_verified}, #{user_password}, #{user_name}, #{provider}, #{tel}, #{address1}, #{address2})
+    </insert>
+
+    <update id="updateUser" parameterType="com.cruise.project_cruise.dto.UserDTO">
+        update users set user_name=#{user_name}, tel=#{tel}, address1=#{address1}, address2=#{address2} where email=#{email}
+    </update>
+</mapper>

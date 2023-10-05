@@ -1,0 +1,165 @@
+  #emailStatus {
+
+             position: absolute;
+            background: #07d6e9;
+            border-radius: .4em;
+            padding: 20px 15px;
+            color: #fff;
+            font-size: 14px;
+            display: none;
+        }
+
+        #emailStatus::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-right-color: #07d6e9;
+            border-left: 0;
+            margin-top: -20px;
+            margin-left: -10px;
+}
+
+           .registration-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style for the form header */
+        .registration-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Style for form fields and labels */
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+
+
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field input[type="password"],
+        .form-field input[type="tel"],
+        .form-field input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Style for the submit button */
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Style for the "OR" text */
+        .or-text {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #showHiddenDivButton{
+            display: block;
+            margin: 0 auto;
+            margin-top: 30px;
+            text-align: center;
+            cursor: pointer;
+
+        }
+            #or {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px; /* Increase font size for better visibility */
+        }
+
+        .or-line {
+            display: inline-block;
+            width: 150px; /* Adjust the line width as needed */
+            height: 2px; /* Adjust the line height as needed */
+            background-color: #ccc; /* Gray line color */
+            margin: 0 10px; /* Spacing between "OR" and lines */
+        }
+
+       .social-icons a{
+
+            text-decoration:none;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+
+    .lastLoginGoogle {
+    position: absolute;
+    top: 9%;
+    left:41%;
+    background-color: #07d6e9;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: #ff0038;
+    background: url(/images/bg-bubble.svg) no-repeat;
+    background-size: 100% 100%;
+}
+
+   .lastLoginKakao {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    background-color: #07d6e9;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: #ff0038;
+    background: url(/images/bg-bubble.svg) no-repeat;
+    background-size: 100% 100%;
+}
+
+    .lastLoginNaver {
+    position: absolute;
+    top: 9%;
+    left:59%;
+    background-color: #07d6e9;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: #ff0038;
+    background: url(/images/bg-bubble.svg) no-repeat;
+    background-size: 100% 100%;
+}
+
+         div.mainPassword{
+                position: relative;
+
+            }
+            div.mainPassword input{
+
+                background-color: white;
+                color: black;
+
+            }
+        div.mainPassword i{
+            position: absolute;
+            left: 92%;
+            top: 12px;
+            color: gray;
+            cursor:pointer;
+        }

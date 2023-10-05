@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지~</title>
+</head>
+
+<body>
+
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+    <!-- If authenticated, display the "Logout" link -->
+    <a th:href="@{/logout}">로그아웃</a>
+</th:block>
+<!-- If not authenticated, display the "Login" and "Sign up" links -->
+<th:block th:unless="${#authorization.expression('isAuthenticated()')}">
+    <a th:href="@{/login}">로그인</a>
+    <a th:href="@{/signup}">회원가입</a>
+</th:block>
+
+</body>
+</html>
+</body>
+</html>

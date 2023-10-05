@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>소셜회원가입</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/nextSocialSignUpForm/nextSocialSignupForm.css}"/>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script src="https://kit.fontawesome.com/79ef7aaf2e.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/nextSocialSignupForm/nextSocialSignupForm.js}"></script>
+
+
+</head>
+<body>
+<div id="form-container">
+<h2>소셜 회원가입 추가정보</h2>
+    <br/><br/>
+
+    <div class="signup-form-container">
+    <form action="/socialSignupProcessing" method="post">
+        <div class="container">
+            <div class="insert">
+
+                <table>
+                    <caption><h2>회원가입 양식</h2></caption>
+                    <tr>
+                        <td class="col1" style="border-bottom: 1px dotted black;">이름</td>
+                        <td class="col2"><input type="text" name="name" maxlength="5"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="col1" style="border-bottom: 1px dotted black;">핸드폰 번호</td>
+                        <td class="col2"><input type="text" name="tel" maxlength="16"></td>
+                    </tr>
+
+                     <tr>
+                         <td class="col1" style="border-bottom: none;">주소</td>
+                         <td style="display :block; border-bottom: none; margin-bottom:20px; margin-top:20px;"> <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" id="addr1" type="text" readonly="readonly" >
+                             <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button></td>
+                         <td style="display :block; border-bottom: none; margin-bottom:20px;"> <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="address1" id="addr2" type="text" readonly="readonly" /></td>
+                         <td style="display :block; border-bottom: none;"><input class="form-control" placeholder="상세주소" name="address2" id="addr3" type="text"  /></td>
+                     </tr>
+
+                </table>
+
+            </div>
+
+            <div class="create">
+
+                <input class="btn-submit" type="submit" value="회원가입완료">
+
+            </div>
+        </div>
+
+
+
+
+
+    </form>
+    </div>
+    </div>
+
+
+</body>
+</html>
