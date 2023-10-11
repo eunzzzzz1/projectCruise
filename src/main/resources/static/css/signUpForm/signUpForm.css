@@ -1,3 +1,9 @@
+   body{
+        font-family: 'NanumSquare', 'sans-serif';
+    }
+
+
+
   #emailStatus {
 
              position: absolute;
@@ -149,4 +155,10 @@
             top: 12px;
             color: gray;
             cursor:pointer;
+        }
+
+        #password-error{
+            font-size: 11px;
+            color: #ff3f3f;
+            margin: 10px 4px 10px;
         }

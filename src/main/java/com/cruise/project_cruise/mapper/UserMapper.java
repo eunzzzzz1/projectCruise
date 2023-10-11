@@ -1,5 +1,6 @@
 package com.cruise.project_cruise.mapper;
 
+import com.cruise.project_cruise.dto.CrewMemberDTO;
 import com.cruise.project_cruise.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,7 @@ public interface UserMapper {
 
    public void updateUser(UserDTO dto) throws Exception;
 
+    public void insertCrewMember(CrewMemberDTO dto) throws Exception;
+
+    public String selectCaptain(CrewMemberDTO dto) throws Exception;
 }

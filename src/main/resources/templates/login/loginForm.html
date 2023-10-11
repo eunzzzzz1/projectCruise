@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>로그인 화면</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/loginForm/loginForm.css}"/>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
 
 
     <script src="https://kit.fontawesome.com/79ef7aaf2e.js" crossorigin="anonymous"></script>
@@ -39,7 +40,7 @@
     <span id="showHiddenDivButton"><h1>일반 로그인</h1></span>
 
     <div id="hiddenDiv" style="display: none;">
-        <form id="signupForm" action="/loginProcessing" method="post" class="form-field">
+        <form id="signupForm" action="/loginProcessing" method="post" class="form-field" onsubmit="showAlert();">
             <div>
                 <input id="emailInput" type="email" name="username" placeholder="이메일" required/>
                 <span id="emailStatus"></span>

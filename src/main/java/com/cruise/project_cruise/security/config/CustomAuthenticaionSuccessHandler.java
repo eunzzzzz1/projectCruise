@@ -27,6 +27,7 @@ public class CustomAuthenticaionSuccessHandler implements AuthenticationSuccessH
 
             PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
             UserDTO userDTO = principalDetails.getUserDTO();
+
             System.out.println(userDTO);
             boolean isNewUser = principalDetails.isNewUser();
 
@@ -34,6 +35,7 @@ public class CustomAuthenticaionSuccessHandler implements AuthenticationSuccessH
                 response.sendRedirect("/nextSocialSignUpForm");
             } else {
                 HttpSession session = request.getSession();
+
 
                 session.setAttribute("lastLoginMethod",userDTO.getProvider());
                 System.out.println(session.getAttribute("lastLoginMethod"));

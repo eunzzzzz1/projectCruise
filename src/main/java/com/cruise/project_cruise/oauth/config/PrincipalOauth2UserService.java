@@ -90,6 +90,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                 userService.insertSocialUser(userDTO);
             }
 
+            System.out.println("principalOauth2UserService");
             System.out.println(userDTO);
 
             //아무튼 dto에 값이 없으면 오류남

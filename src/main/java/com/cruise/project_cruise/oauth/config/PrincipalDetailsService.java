@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-// 시큐리티 설정에서 loginProcessingUrl("/login"); 했으면
+// 시큐리티 설정에서 loginProcessingUrl("/loginProcessing"); 했으면
 // /login요청이 오면 자동으로 UserDetailsService 타입으로 IoC 되어 있는 loadUserByUsername 함수가 실행
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
@@ -22,7 +22,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println(username);
+        System.out.println(username); //이메일임 이걸 useremail사용하고 싶으면 security설정바꿔야했던것같음..
         UserDTO userDTO = new UserDTO();
 
 
@@ -31,7 +31,8 @@ public class PrincipalDetailsService implements UserDetailsService {
             userDTO.setEmail(userService.selectEmail(username));
             if (userDTO.getEmail() != null) {
                 userDTO.setUser_password(userService.selectPassWord(username));
-                System.out.println(userDTO);
+
+                System.out.println("PrincipalDetailsService: " + userDTO);
 
                 return new PrincipalDetails(userDTO);
             }

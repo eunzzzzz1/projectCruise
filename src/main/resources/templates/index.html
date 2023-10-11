@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <title>Title</title>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet"/>
+    <script id="javascript-sdk" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script th:src="@{/js/kakaoLink/kakaoLink.js"}></script>
+
 </head>
 <body>
+<p><strong>아래 카카오톡 아이콘을 눌러 전송하세요</strong></p>
+<a id="kakao-link-btn" href="javascript:sendLink()">
+    <img
+            src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+    />
+</a>
+<p id="sessionGroup" th:text="${group}"></p>
+<p id="sessionNum" th:text="${num}" ></p>
+
+
 
 </body>
 </html>

@@ -4,10 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cruise.project_cruise.mapper.UserMapper">
-    <!-- TemplateMapper 지우고 자기 매퍼이름을 기입해주세요 -->
 
-    <!--    id에는 MapperInterface의 메소드 이름을 기입합니다.-->
-    <!--    resultType에는 그 메소드의 반환값 타입을 입력해줍니다.-->
     <select id="selectEmail"  parameterType="com.cruise.project_cruise.dto.UserDTO" resultType="java.lang.String">
         select email from users where email=#{email}
     </select>
@@ -32,4 +29,16 @@
     <update id="updateUser" parameterType="com.cruise.project_cruise.dto.UserDTO">
         update users set user_name=#{user_name}, tel=#{tel}, address1=#{address1}, address2=#{address2} where email=#{email}
     </update>
+
+
+
+    <!-- 여기 아래는 user관련 mapper는 아니지만 다른팀원과 충돌날 우려가 있어서 일단 여기에 만들겠음 -->
+    <insert id="insertCrewMember" parameterType="com.cruise.project_cruise.dto.CrewMemberDTO">
+        insert into crew_member (crew_num,cmem_email,joindate) values (#{crew_num}, #{cmem_email},sysdate)
+    </insert>
+
+    <select id="selectCaptain" parameterType="com.cruise.project_cruise.dto.CrewMemberDTO" resultType="java.lang.String">
+        select captain_YN from crew_member where crew_num=#{crew_num} and cmem_email=#{cmem_email}
+    </select>
+
 </mapper>

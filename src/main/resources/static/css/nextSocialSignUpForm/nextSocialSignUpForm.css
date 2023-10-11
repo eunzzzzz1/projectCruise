@@ -1,84 +1,79 @@
-  #form-container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f7f7f7;
-        }
-        h2 {
-            text-align: center;
-        }
-        .signup-form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f7f7f7;
-        }
+body {
+    font-family: 'NanumSquare', 'sans-serif';
+}
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+#form-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
 
-        .form-control {
-            width: 50%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
+h2 {
+    text-align: center;
+}
 
-        .zip-code {
-            display: flex;
-            align-items: center;
-        }
-        .btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
+.signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
 
-        .btn-submit {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
 
-        div.create {
-            width: 800px;
-            text-align: center;
-            padding: 30px;
-            margin: auto;
-        }
-        table {
-            height: 300px;
-            width: 700px;
-            border-top: 3px solid black;
-            border-bottom: 3px solid black;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        td {
-            border-bottom: 1px dotted black;
-        }
-        caption {
-            text-align: left;
-        }
-        .col1 {
-            background-color: #e8e8e8;
-            padding: 10px;
-            text-align: right;
-            font-weight: bold;
-            font-size: 0.8em;
-        }
-        .col2 {
-            text-align: left;
-            padding: 5px;
-        }
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 90%; /* 변경: 입력 요소를 꽉 채우도록 너비 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top:5px;
+}
+
+.zip-code {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+div.create {
+    width: 800px;
+    text-align: center;
+    padding: 30px;
+    margin: auto;
+}
+
+caption {
+    text-align: left;
+}
+
+#phone-number-error {
+    /* 변경: 오류 메시지 스타일을 지정 */
+    font-size: 11px;
+    color: #ff3f3f;
+    margin: 10px 4px 5px;
+}
