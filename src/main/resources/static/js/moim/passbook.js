@@ -54,7 +54,7 @@ function sendIt(){
 	closeBtn.addEventListener("click", e => {
     const modal = document.getElementById("modal")
     modal.style.display = "none"
-    window.location.href = "http://localhost:8080/main";
+    window.location.href = "http://localhost:8082/mypage/mypage_all";
 
 });
 
