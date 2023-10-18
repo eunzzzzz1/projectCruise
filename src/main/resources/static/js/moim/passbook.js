@@ -29,16 +29,6 @@ function sendIt(){
     }
     f.crewPaydate.value = str;
 
-    let value = parseInt(f.crewPaydate.value, 10);
-    if (isNaN(value) || value < 1 || value > 31) {
-    alert("1~31 범위로 입력하세요.");
-    f.crewPaydate.value = '';
-    f.crewPaydate.focus();
-     return; // 예외가 발생한 경우, 여기서 함수를 종료합니다.
-    }
-
-     f.crewPaydate.value = str;
-
     if(!f.consent.checked){
         alert("\n약관에 동의하세요");
         f.consent.focus();
@@ -48,14 +38,32 @@ function sendIt(){
      // 필수 입력 항목이 모두 입력되었을 때만 모달 창을 엽니다.
     const modal = document.getElementById("modal")
     modal.style.display = "flex";
+
+    // 모임 통장 이름, 계좌 번호를 모달 창으로 전달
+    var crewNameValue = document.getElementById("crewName").value;
+    document.getElementById("crewNameTd").innerText = crewNameValue;
+
+    var accountSelect = document.getElementById("my_account");
+    var accountValue = accountSelect.options[accountSelect.selectedIndex].text;
+    document.getElementById("accountTd").innerText = accountValue;
+
+    var createdTdElement = document.getElementById("createdTd");
+    var currentDate = new Date();
+    var formattedDate = currentDate.toLocaleString(); // 예: "2023-09-20 15:47:54"
+    createdTdElement.textContent = formattedDate;
+
 }
 
-	const closeBtn = document.querySelector(".close-area")
-	closeBtn.addEventListener("click", e => {
+var selected = function(value) {
+    console.log(value);
+}
+
+const closeBtn = document.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
     const modal = document.getElementById("modal")
     modal.style.display = "none"
-    window.location.href = "http://localhost:8080/main";
-
+    document.myForm.action = "/moim/passbook";
+    document.myForm.submit();
 });
 
 //체크박스 선택시 활성화(기존계좌)
