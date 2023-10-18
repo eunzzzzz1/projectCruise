@@ -66,11 +66,11 @@
 			<h2><br>[[${dto.board_subject}]]</h2>
 			<div class="article_button_flex">
 				<input type="button" value=" 수정 " class="article_button2"
-					   th:if="${userInfo.email == dto.email}"
+					   th:if="${email == dto.email}"
 					   th:onclick="'location=\'updated?board_num=' +
 					@{${dto.board_num }} + '&' + @{${params }} + '\''"/>
 				<input type="button" value=" 삭제 " class="article_button2"
-					   th:if="${userInfo.email == dto.email}"
+					   th:if="${email == dto.email}"
 					   th:onclick="'confirmDeleteArticle(' + ${dto.board_num} + ')'"/>
 			</div>
 			<div class="header">

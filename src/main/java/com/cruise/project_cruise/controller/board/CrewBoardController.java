@@ -164,7 +164,7 @@ public class CrewBoardController {
 		ModelAndView mav = new ModelAndView();
 
 		if(userEmail == null) {
-			mav.setViewName("redirect:/main");
+			mav.setViewName("redirect:/");
 			return mav;
 		}
 
