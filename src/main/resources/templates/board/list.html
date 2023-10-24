@@ -70,7 +70,7 @@
 		</div>
 		<div>
 			<div id="bbsList_title" th:if="${boardTitle != null}">
-				<a href="#" class="crew-main"><h4 th:text="${boardTitle['CREW_NAME']}">겸댕이들 먹방 통장</h4></a>
+				<a th:href="@{http://localhost:8082/crew(crewNum=${crewNum})}" class="crew-main"><h4 th:text="${boardTitle['CREW_NAME']}">겸댕이들 먹방 통장</h4></a>
 				<p th:text="${boardTitle['CREW_INFO']}">굶주린 겸댕이들 끊임 없이 먹는 모임입니다</p>
 				<div><i style="color: #FFD966;" class="fa-regular fa-chess-king"></i>
 					모임장 : <span th:text="${boardTitle['CAPTAIN_NAME']}"></span></div>
