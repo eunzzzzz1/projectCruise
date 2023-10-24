@@ -53,4 +53,9 @@ public class CrewDetailServiceImpl implements CrewDetailService {
         return crewDetailMapper.getCrewUserInfo(crewNum, userEmail);
     }
 
+    @Override
+    public void updateCrewMemberPayment(int crewNum, String userEmail, int payment, int payCount) throws Exception {
+        crewDetailMapper.updateCrewMemberPayment(crewNum,userEmail,payment,payCount);
+    }
+
 }

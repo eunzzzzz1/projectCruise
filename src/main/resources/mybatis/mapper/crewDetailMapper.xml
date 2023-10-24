@@ -63,9 +63,17 @@
             ON A.CMEM_EMAIL = B.EMAIL
     </select>
 
-
     <!--  크루 탈퇴 시 crewMember 테이블에서 해당 선원을 삭제  -->
     <delete id="deleteCrewMember" parameterType="hashMap">
         delete crew_member where cmem_email=#{cmemEmail} and crew_num=#{crewNum}
     </delete>
+
+    <!-- 크루 회비 납입 시 실제 납입횟수, totalPay 업데이트 하기 -->
+    <update id="updateCrewMemberPayment" parameterType="map">
+        update CREW_MEMBER
+        set
+            TOTAL_PAY=TOTAL_PAY+#{payment},
+            REAL_PAYCOUNT=REAL_PAYCOUNT + #{payCount}
+        where CREW_NUM=#{crewNum} and CMEM_EMAIL=#{userEmail}
+    </update>
 </mapper>

@@ -16,7 +16,7 @@ public interface CrewDetailService {
     public String getCaptainName(String captainEmail) throws Exception;
     public int getAccountBalance(String crewAccount) throws Exception;
     public Map<String,Object> getCrewUserInfo(@Param("crewNum")int crewNum, @Param("userEmail") String userEmail) throws Exception;
-
-
+    public void updateCrewMemberPayment(@Param("crewNum")int crewNum, @Param("userEmail") String userEmail,
+                                        @Param("payment") int payment, @Param("payCount") int payCount) throws Exception;
 
 }
