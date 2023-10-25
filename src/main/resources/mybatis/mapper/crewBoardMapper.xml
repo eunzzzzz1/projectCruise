@@ -65,15 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="boardTitle" parameterType="int" resultType="hashmap">
 	SELECT * FROM (
-	SELECT c.crew_name, c.crew_info, cb.name AS captain_name,
+	SELECT c.crew_name, c.crew_info, cb.user_name AS captain_name,
 	(SELECT COUNT(*) FROM crew_member WHERE crew_num = #{crew_num}) AS member_count
 	FROM crew c
-	INNER JOIN crew_board cb ON c.captain_email = cb.email
-	WHERE c.crew_num = #{crew_num}
-	)
-	<![CDATA[
-	WHERE ROWNUM <= 1
-	]]>
+	INNER JOIN users cb ON c.captain_email = cb.email
+	WHERE c.crew_num = #{crew_num})
 </select>
 
 <select id="checkCaptain" resultType="String" parameterType="hashmap">
