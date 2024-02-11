@@ -157,10 +157,10 @@ public class CrewController {
         // bold 0. 크루 캡틴에게만 크루관리 뜨게 하기 - 완료
         if (crewDetailService.isCaptain(crewNum, userEmail)) {
             log.info(crewNum + " - " + dto.getCrew_name() + "에 선장 " + userEmail + " 접속");
-            mav.addObject("isCaptain", "true");
+            mav.addObject("isCaptain", true);
         } else {
             log.info(crewNum + " - " + dto.getCrew_name() + "에 선원 " + userEmail + " 접속");
-            mav.addObject("isCaptain", "false");
+            mav.addObject("isCaptain", false);
         }
 
 

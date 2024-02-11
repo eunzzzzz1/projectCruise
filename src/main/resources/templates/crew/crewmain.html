@@ -257,8 +257,7 @@
                 <button class="gotoBoardBtn" type="button"
                     th:onclick="location='/board/list?crewNum=[[${dto.crew_num}]]'">소통게시판</button>
             </div>
-            <div th:if="${isCaptain=='true'}" class="crewmanage"><a th:href="@{|/crew/setting?crewNum=${crewNum}|}">크루 관리</a></div>
-            <div th:if="${isCaptain=='false'}" class="crewmanage">&nbsp;</div>
+            <div th:if="${isCaptain}" class="crewmanage"><a th:href="@{|/crew/setting?crewNum=${crewNum}|}">크루 관리</a></div>
             <div id="crewinvite">
                 <div id="sessionGroup" th:text="${dto.getCrew_name()}"></div>
                 <div id="sessionNum" th:text="${crewNum}" ></div>
