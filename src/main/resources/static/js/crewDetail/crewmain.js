@@ -373,7 +373,7 @@
             exitModalDiv.classList.add("exitVisible");
         }
 
-        if (captainYN === 'true') {
+        if (captainYN) {
 
             if (cannotExitDiv.classList.contains("exitHidden")) {
                 cannotExitDiv.classList.remove("exitHidden");
