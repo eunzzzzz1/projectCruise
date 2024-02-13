@@ -122,9 +122,11 @@
 
     function clickUpArrow(mustPayMoney) {
 
-        if(numValue>=availablepay) {
+        if(numValue===availablepay) {
             up.style.color = 'lightgray'
-        }else {
+            up.style.cursor = 'not-allowed'
+
+        } else {
             numValue++;
             num.value = numValue;
             up.style.color = ''
@@ -137,6 +139,11 @@
             up.style.color = 'lightgray'
             up.style.cursor = 'not-allowed'
         }
+        /**
+         * 위 if문을 따로 한 번 더 써두지 않으면
+         * 납입회차를 downArrow를 클릭해 내린 후 다시 upArrow를 클릭해 최대치로 올렸을 때
+         * 바로 회색 + not-allowed 커서로 변하지 않고 한 번 더 클릭해줘야 변함
+         */
 
     }
 
@@ -228,7 +235,6 @@
         }
 
         var crewNum = $('#crewNum').val();
-        var crewName = $('#crewNameStr').val().substr(0,2);
         var userNum = $('#userNum').val();
         var transferMoney = $('#payMoney').text().replace(",","");
         var transferDateObj = new Date();
@@ -252,7 +258,7 @@
                 depositAccount:crewAccount,
                 transferDate:transferDateStr,
                 transferMoney:transferMoney,
-                transferContent:crewNum+userNum+"_"+userName // 크루이름 3글자만 잘라서 넣음
+                transferContent:crewNum+userNum+"_"+userName
             }
         })
 
