@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 public class TemplateController {
 
     //안녕?
+    //또 안녕?
+
     @Resource
     private TemplateService templateService;
 
