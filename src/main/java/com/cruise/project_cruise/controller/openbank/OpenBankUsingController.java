@@ -107,7 +107,8 @@ public class OpenBankUsingController {
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("account_num", account_num);
-        map.put("balance_amt", developOpenBankingService.getAccountBalance(account_num));
+        map.put("bank_name", developOpenBankingService.getAccountBalance(account_num).get("OPEN_BANK"));
+        map.put("balance_amt", developOpenBankingService.getAccountBalance(account_num).get("OPEN_BALANCE"));
 
         return new JSONObject(map);
     }
