@@ -31,7 +31,7 @@
     <!--    계좌 사용내역 목록 가지고오기 -->
     <select id="getUsingList" parameterType="java.lang.String" resultType="com.cruise.project_cruise.dto.develop.OpenBankUsingDTO">
         select
-            OPENUSE_NUM, OPENUSE_DATE, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
+            OPENUSE_NUM, OPENUSE_DATE, OPEN_ACCOUNT, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
@@ -41,7 +41,7 @@
     <!-- 특정 일자의 거래내역 가지고오기 -->
     <select id="searchInquiryForDate" parameterType="map" resultType="com.cruise.project_cruise.dto.develop.OpenBankUsingDTO">
         select
-            OPENUSE_NUM, OPENUSE_DATE, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
+            OPENUSE_NUM, OPENUSE_DATE, OPEN_ACCOUNT, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
@@ -54,7 +54,7 @@
     <!-- 특정 거래내용의 거래내역 가지고오기 -->
     <select id="searchInquiryForContent" parameterType="map" resultType="com.cruise.project_cruise.dto.develop.OpenBankUsingDTO">
         select
-            OPENUSE_NUM, OPENUSE_DATE, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
+            OPENUSE_NUM, OPENUSE_DATE, OPEN_ACCOUNT, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
@@ -64,7 +64,7 @@
 
     <select id="searchInquiryForDateAndContent" parameterType="map" resultType="com.cruise.project_cruise.dto.develop.OpenBankUsingDTO">
         select
-            OPENUSE_NUM, OPENUSE_DATE, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
+            OPENUSE_NUM, OPENUSE_DATE, OPEN_ACCOUNT, OPENUSE_ASSORT, OPENUSE_OUTMONEY,
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
