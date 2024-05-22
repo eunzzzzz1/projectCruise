@@ -2,6 +2,7 @@ package com.cruise.project_cruise.controller.openbank;
 
 import com.cruise.project_cruise.dto.develop.OpenBankDTO;
 import com.cruise.project_cruise.dto.develop.OpenBankUsingDTO;
+import com.cruise.project_cruise.exception.NoDataException;
 import com.cruise.project_cruise.service.DevelopOpenBankUsingService;
 import com.cruise.project_cruise.service.DevelopOpenBankingService;
 import org.json.simple.JSONArray;
@@ -51,9 +52,9 @@ public class OpenBankUsingController {
     public JSONArray searchInquiry(
             @RequestParam("searchType") int searchType,
             @RequestParam("selectedAccount") String selectedAccount,
-            @RequestParam("content") String content,
-            @RequestParam("startDate") String startDate,
-            @RequestParam("endDate") String endDate
+            @RequestParam(value = "content", required = false, defaultValue = "") String content,
+            @RequestParam(value = "startDate", required = false, defaultValue = "") String startDate,
+            @RequestParam(value = "endDate", required = false, defaultValue = "") String endDate
     ) throws Exception {
         JSONObject jsonObject;
         JSONArray jsonArray = new JSONArray();
@@ -64,7 +65,8 @@ public class OpenBankUsingController {
         // 1 : 계좌 + 특정일자
         // 2 : 계좌 + 특정 거래내용
         // 3 : 특정 거래내용 + 특정일자
-        // 4 : 출금액 합계, 입금액 합계
+        // 4 : 특정 거래내용 + 특정일자 간의 출금액 합계, 입금액 합계
+
 
         List<OpenBankUsingDTO> usingList = null;
         if(searchType >=0 && searchType <=3) {
@@ -74,18 +76,23 @@ public class OpenBankUsingController {
                     usingList = developOpenBankUsingService.getUsingList(selectedAccount);
                     break;
                 case 1:
+                    if(startDate.isEmpty()) throw new NoDataException("NO_STARTDATE_DATA_EXCEPTION");
+                    if(endDate.isEmpty()) throw new NoDataException("NO_ENDDATE_DATA_EXCEPTION");
                     usingList = developOpenBankUsingService.searchInquiryForDate(selectedAccount,startDate,endDate);
                     break;
                 case 2:
+                    if(content.isEmpty() || content.equals("")) throw new NoDataException("NO_CONTENT_DATA_EXCEPTION");
                     usingList = developOpenBankUsingService.searchInquiryForContent(selectedAccount,content);
                     break;
                 case 3:
+                    if(startDate.isEmpty()) throw new NoDataException("NO_STARTDATE_DATA_EXCEPTION");
+                    if(endDate.isEmpty()) throw new NoDataException("NO_ENDDATE_DATA_EXCEPTION");
+                    if(content.isEmpty()) throw new NoDataException("NO_CONTENT_DATA_EXCEPTION");
                     usingList = developOpenBankUsingService.searchInquiryForDateAndContent(selectedAccount,startDate,endDate,content);
                     break;
             }
 
             for(int i=0;i<usingList.size();i++) {
-                usingHash.put("num",usingList.get(i).getOpenuse_num());
                 usingHash.put("account",usingList.get(i).getOpen_account());
                 usingHash.put("date",usingList.get(i).getOpenuse_date());
                 usingHash.put("assort",usingList.get(i).getOpenuse_assort());
@@ -99,8 +106,13 @@ public class OpenBankUsingController {
             }
 
         } else if (searchType==4) {
+
             Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
             Map<String,Object> sumMap = new HashMap<>();
+            sumMap.put("account", selectedAccount);
+            sumMap.put("content", content);
+            sumMap.put("startDate", startDate);
+            sumMap.put("endDate", endDate);
             sumMap.put("inMoney",result.get("INMONEY"));
             sumMap.put("outMoney",result.get("OUTMONEY"));
 
