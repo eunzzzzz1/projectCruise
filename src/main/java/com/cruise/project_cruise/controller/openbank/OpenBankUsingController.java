@@ -62,7 +62,7 @@ public class OpenBankUsingController {
         // 1 : 계좌 + 특정일자
         // 2 : 계좌 + 특정 거래내용
         // 3 : 특정 거래내용 + 특정일자
-        // 4 : 합계
+        // 4 : 잔액 조회
 
         List<OpenBankUsingDTO> usingList = null;
 
@@ -98,7 +98,7 @@ public class OpenBankUsingController {
                 jsonArray.add(jsonObject);
             }
 
-        } else if (searchType==4) {
+        } else if (searchType==4) { // 잔액조회
             Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
             Map<String,Object> sumMap = new HashMap<>();
             sumMap.put("inMoney",result.get("INMONEY"));

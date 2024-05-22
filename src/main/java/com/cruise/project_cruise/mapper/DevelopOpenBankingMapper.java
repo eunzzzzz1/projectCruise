@@ -13,4 +13,5 @@ public interface DevelopOpenBankingMapper {
     public void insertAccount(OpenBankDTO openBankDTO) throws Exception;
     public void updateAccount(OpenBankDTO openBankDTO) throws Exception;
     public void deleteAccount(@Param("account") String account) throws Exception;
+    public void getAccountBalance(@Param("account") String account) throws Exception;
 }
