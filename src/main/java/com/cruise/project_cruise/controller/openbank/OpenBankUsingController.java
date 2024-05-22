@@ -45,7 +45,7 @@ public class OpenBankUsingController {
         return errorMsg;
     }
 
-// red 조회
+// red 거래내역 조회
     @RequestMapping(value = "/search")
     @ResponseBody
     public JSONArray searchInquiry(
@@ -64,53 +64,52 @@ public class OpenBankUsingController {
         // 1 : 계좌 + 특정일자
         // 2 : 계좌 + 특정 거래내용
         // 3 : 특정 거래내용 + 특정일자
-        // 4 : 해당 계좌 잔액 조회
 
         List<OpenBankUsingDTO> usingList = null;
 
-        if(searchType >=0 && searchType <=3) {
+        switch (searchType) {
 
-            switch (searchType) {
+            case 0:
+                usingList = developOpenBankUsingService.getUsingList(selectedAccount);
+                break;
+            case 1:
+                usingList = developOpenBankUsingService.searchInquiryForDate(selectedAccount,startDate,endDate);
+                break;
+            case 2:
+                usingList = developOpenBankUsingService.searchInquiryForContent(selectedAccount,content);
+                break;
+            case 3:
+                usingList = developOpenBankUsingService.searchInquiryForDateAndContent(selectedAccount,startDate,endDate,content);
+                break;
+        }
 
-                case 0:
-                    usingList = developOpenBankUsingService.getUsingList(selectedAccount);
-                    break;
-                case 1:
-                    usingList = developOpenBankUsingService.searchInquiryForDate(selectedAccount,startDate,endDate);
-                    break;
-                case 2:
-                    usingList = developOpenBankUsingService.searchInquiryForContent(selectedAccount,content);
-                    break;
-                case 3:
-                    usingList = developOpenBankUsingService.searchInquiryForDateAndContent(selectedAccount,startDate,endDate,content);
-                    break;
-            }
-
-            for(int i=0;i<usingList.size();i++) {
-                usingHash.put("num",usingList.get(i).getOpenuse_num());
-                usingHash.put("account",usingList.get(i).getOpen_account());
-                usingHash.put("date",usingList.get(i).getOpenuse_date());
-                usingHash.put("assort",usingList.get(i).getOpenuse_assort());
-                usingHash.put("outMoney",usingList.get(i).getOpenuse_outmoney());
-                usingHash.put("inMoney",usingList.get(i).getOpenuse_inmoney());
-                usingHash.put("content",usingList.get(i).getOpenuse_content());
-                usingHash.put("balance",usingList.get(i).getOpenuse_balance());
-
-                jsonObject = new JSONObject(usingHash);
-                jsonArray.add(jsonObject);
-            }
-
-        } else if (searchType==4) { // 잔액조회
-            int balance = developOpenBankingService.getAccountBalance(selectedAccount);
-
-            usingHash.put("account", selectedAccount);
-            usingHash.put("balance", balance);
+        for(int i=0;i<usingList.size();i++) {
+            usingHash.put("num",usingList.get(i).getOpenuse_num());
+            usingHash.put("account",usingList.get(i).getOpen_account());
+            usingHash.put("date",usingList.get(i).getOpenuse_date());
+            usingHash.put("assort",usingList.get(i).getOpenuse_assort());
+            usingHash.put("outMoney",usingList.get(i).getOpenuse_outmoney());
+            usingHash.put("inMoney",usingList.get(i).getOpenuse_inmoney());
+            usingHash.put("content",usingList.get(i).getOpenuse_content());
+            usingHash.put("balance",usingList.get(i).getOpenuse_balance());
 
             jsonObject = new JSONObject(usingHash);
-            jsonArray.add(usingHash);
+            jsonArray.add(jsonObject);
         }
 
         return jsonArray;
+    }
+
+// red 잔액 조회
+    @RequestMapping(value = "/balance")
+    @ResponseBody
+    public JSONObject getAccountBalance(@RequestParam("account_num") String account_num) throws Exception {
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("account_num", account_num);
+        map.put("balance_amt", developOpenBankingService.getAccountBalance(account_num));
+
+        return new JSONObject(map);
     }
 
 
