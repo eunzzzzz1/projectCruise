@@ -12,5 +12,6 @@ public interface DevelopOpenBankingService {
     public void insertAccount(OpenBankDTO openBankDTO) throws Exception;
     public void updateAccount(OpenBankDTO openBankDTO) throws Exception;
     public void deleteAccount(String account) throws Exception;
+    public int getAccountBalance(String account) throws Exception;
 
 }

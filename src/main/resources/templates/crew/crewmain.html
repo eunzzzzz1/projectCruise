@@ -285,7 +285,7 @@
             <div class="dotline2"></div>
             <div class="goal_sub">모인금액</div>
             <div class="achieve">
-                <div class="achieve_money" th:text="${crewAccountBalance}">900,000</div>
+                <div class="achieve_money" id="crewAccountBalance">0</div>
                 <div th:if="${crewGoal=='0'}" class="goal_money">원</div>
                 <div th:if="${crewGoal!='0'}" class="goal_money">원 / [[${crewGoal}]] 원</div>
             </div>
@@ -548,6 +548,24 @@
     payMoney.textContent = String((payMoneyInt * num.value).toLocaleString("ko-KR"));
     setMemNames(/*[[${memberList}]]*/)
     setMemPayMoney(/*[[${memberList}]]*/,fullDates);
+
+    // 잔액 가지고오기
+    var balanceDiv = document.getElementById("crewAccountBalance");
+    $.ajax({
+        type : "POST",
+        url : "/develop/openbank/using/balance",
+        data : {
+            account_num:''+/*[[${dto.crew_accountid}]]*/,
+        },
+        success : function(result){
+            balanceDiv.textContent = result.balance_amt.toLocaleString("ko-KR");
+            console.log(result.balance_amt);
+        },
+        error:function(xhr,status,error) {
+            console.log("잔액 조회 에러" + error);
+        }
+    });
+
     /*]]>*/
 </script>
 </html>

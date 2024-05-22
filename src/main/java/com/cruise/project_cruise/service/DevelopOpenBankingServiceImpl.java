@@ -35,4 +35,9 @@ public class DevelopOpenBankingServiceImpl implements DevelopOpenBankingService{
         developOpenBankingMapper.deleteAccount(account);
     }
 
+    @Override
+    public int getAccountBalance(String account) throws Exception{
+        return developOpenBankingMapper.getAccountBalance(account);
+    }
+
 }

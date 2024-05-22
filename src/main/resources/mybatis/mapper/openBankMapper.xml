@@ -31,4 +31,10 @@
     <delete id="deleteAccount" parameterType="java.lang.String">
         delete OPENBANK where OPEN_ACCOUNT=#{account}
     </delete>
+
+    <!-- 오픈뱅킹 테이블에서 계좌잔액 가지고오기 -->
+    <select id="getAccountBalance" parameterType="java.lang.String" resultType="int">
+        select OPEN_BALANCE from OPENBANK
+        where OPEN_ACCOUNT=#{account}
+    </select>
 </mapper>
