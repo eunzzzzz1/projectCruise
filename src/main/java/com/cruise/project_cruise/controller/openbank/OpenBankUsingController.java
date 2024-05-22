@@ -22,6 +22,8 @@ public class OpenBankUsingController {
 
     @Autowired
     private DevelopOpenBankUsingService developOpenBankUsingService;
+    @Autowired
+    private DevelopOpenBankingService developOpenBankingService;
 
 // red 입출금 처리
     @RequestMapping(value = "/transfer")
@@ -53,7 +55,7 @@ public class OpenBankUsingController {
             @RequestParam("startDate") String startDate,
             @RequestParam("endDate") String endDate
     ) throws Exception {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject;
         JSONArray jsonArray = new JSONArray();
         HashMap<String, Object> usingHash = new HashMap<>();
 
@@ -62,7 +64,7 @@ public class OpenBankUsingController {
         // 1 : 계좌 + 특정일자
         // 2 : 계좌 + 특정 거래내용
         // 3 : 특정 거래내용 + 특정일자
-        // 4 : 잔액 조회
+        // 4 : 해당 계좌 잔액 조회
 
         List<OpenBankUsingDTO> usingList = null;
 
@@ -99,13 +101,13 @@ public class OpenBankUsingController {
             }
 
         } else if (searchType==4) { // 잔액조회
-            Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
-            Map<String,Object> sumMap = new HashMap<>();
-            sumMap.put("inMoney",result.get("INMONEY"));
-            sumMap.put("outMoney",result.get("OUTMONEY"));
+            int balance = developOpenBankingService.getAccountBalance(selectedAccount);
 
-            jsonObject = new JSONObject(sumMap);
-            jsonArray.add(sumMap);
+            usingHash.put("account", selectedAccount);
+            usingHash.put("balance", balance);
+
+            jsonObject = new JSONObject(usingHash);
+            jsonArray.add(usingHash);
         }
 
         return jsonArray;

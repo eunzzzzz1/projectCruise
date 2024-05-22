@@ -36,8 +36,8 @@ public class DevelopOpenBankingServiceImpl implements DevelopOpenBankingService{
     }
 
     @Override
-    public void getAccountBalance(String account) throws Exception{
-        developOpenBankingMapper.getAccountBalance(account);
+    public int getAccountBalance(String account) throws Exception{
+        return developOpenBankingMapper.getAccountBalance(account);
     }
 
 }
