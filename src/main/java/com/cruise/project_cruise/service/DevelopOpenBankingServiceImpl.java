@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Map;
 
 
 @Service
@@ -36,7 +36,7 @@ public class DevelopOpenBankingServiceImpl implements DevelopOpenBankingService{
     }
 
     @Override
-    public int getAccountBalance(String account) throws Exception{
+    public Map<String,String> getAccountBalance(String account) throws Exception{
         return developOpenBankingMapper.getAccountBalance(account);
     }
 
