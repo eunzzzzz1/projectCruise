@@ -559,7 +559,6 @@
         },
         success : function(result){
             balanceDiv.textContent = result.balance_amt.toLocaleString("ko-KR");
-            console.log(result.balance_amt);
         },
         error:function(xhr,status,error) {
             console.log("잔액 조회 에러" + error);

@@ -64,37 +64,48 @@ public class OpenBankUsingController {
         // 1 : 계좌 + 특정일자
         // 2 : 계좌 + 특정 거래내용
         // 3 : 특정 거래내용 + 특정일자
+        // 4 : 출금액 합계, 입금액 합계
 
         List<OpenBankUsingDTO> usingList = null;
+        if(searchType >=0 && searchType <=3) {
+            switch (searchType) {
 
-        switch (searchType) {
+                case 0:
+                    usingList = developOpenBankUsingService.getUsingList(selectedAccount);
+                    break;
+                case 1:
+                    usingList = developOpenBankUsingService.searchInquiryForDate(selectedAccount,startDate,endDate);
+                    break;
+                case 2:
+                    usingList = developOpenBankUsingService.searchInquiryForContent(selectedAccount,content);
+                    break;
+                case 3:
+                    usingList = developOpenBankUsingService.searchInquiryForDateAndContent(selectedAccount,startDate,endDate,content);
+                    break;
+            }
 
-            case 0:
-                usingList = developOpenBankUsingService.getUsingList(selectedAccount);
-                break;
-            case 1:
-                usingList = developOpenBankUsingService.searchInquiryForDate(selectedAccount,startDate,endDate);
-                break;
-            case 2:
-                usingList = developOpenBankUsingService.searchInquiryForContent(selectedAccount,content);
-                break;
-            case 3:
-                usingList = developOpenBankUsingService.searchInquiryForDateAndContent(selectedAccount,startDate,endDate,content);
-                break;
-        }
+            for(int i=0;i<usingList.size();i++) {
+                usingHash.put("num",usingList.get(i).getOpenuse_num());
+                usingHash.put("account",usingList.get(i).getOpen_account());
+                usingHash.put("date",usingList.get(i).getOpenuse_date());
+                usingHash.put("assort",usingList.get(i).getOpenuse_assort());
+                usingHash.put("outMoney",usingList.get(i).getOpenuse_outmoney());
+                usingHash.put("inMoney",usingList.get(i).getOpenuse_inmoney());
+                usingHash.put("content",usingList.get(i).getOpenuse_content());
+                usingHash.put("balance",usingList.get(i).getOpenuse_balance());
 
-        for(int i=0;i<usingList.size();i++) {
-            usingHash.put("num",usingList.get(i).getOpenuse_num());
-            usingHash.put("account",usingList.get(i).getOpen_account());
-            usingHash.put("date",usingList.get(i).getOpenuse_date());
-            usingHash.put("assort",usingList.get(i).getOpenuse_assort());
-            usingHash.put("outMoney",usingList.get(i).getOpenuse_outmoney());
-            usingHash.put("inMoney",usingList.get(i).getOpenuse_inmoney());
-            usingHash.put("content",usingList.get(i).getOpenuse_content());
-            usingHash.put("balance",usingList.get(i).getOpenuse_balance());
+                jsonObject = new JSONObject(usingHash);
+                jsonArray.add(jsonObject);
+            }
 
-            jsonObject = new JSONObject(usingHash);
-            jsonArray.add(jsonObject);
+        } else if (searchType==4) {
+            Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
+            Map<String,Object> sumMap = new HashMap<>();
+            sumMap.put("inMoney",result.get("INMONEY"));
+            sumMap.put("outMoney",result.get("OUTMONEY"));
+
+            jsonObject = new JSONObject(sumMap);
+            jsonArray.add(sumMap);
         }
 
         return jsonArray;
