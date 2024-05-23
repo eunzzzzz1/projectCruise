@@ -261,13 +261,13 @@
         })
 
         transperReq.done(function (result) {
-            if(result==="NODATA"){
+            if(result.req_message==="NO_DATA"){
                 alert("납입 실패 - 데이터가 입력되지 않았습니다.");
                 return;
-            } else if(result==="LACKOFBALANCE"){
+            } else if(result.req_message==="LACK_OF_BALANCE"){
                 alert("납입 실패 - 출금 계좌의 잔액이 부족합니다.");
                 return;
-            } else if(result=="TRANSFERMONEYZERO"){
+            } else if(result.req_message=="TRANSFER_MONEY_ZERO"){
                 alert("납입 실패 - 거래 금액이 0원입니다.");
                 return;
             }
