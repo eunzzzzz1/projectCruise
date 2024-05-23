@@ -3,6 +3,7 @@ package com.cruise.project_cruise.service;
 import com.cruise.project_cruise.dto.develop.OpenBankDTO;
 import com.cruise.project_cruise.mapper.DevelopOpenBankingMapper;
 import com.cruise.project_cruise.mapper.TemplateMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,10 @@ public class DevelopOpenBankingServiceImpl implements DevelopOpenBankingService{
 
     public List<OpenBankDTO> getAccountList() throws Exception {
         return developOpenBankingMapper.getAccountList();
+    }
+
+    public String getAccountInfo(String account) throws Exception {
+        return developOpenBankingMapper.getAccountInfo(account);
     }
 
     @Override

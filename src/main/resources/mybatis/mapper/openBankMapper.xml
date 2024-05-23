@@ -9,6 +9,13 @@
         select OPEN_ACCOUNT, OPEN_BANK, OPEN_ANAME, OPEN_NAME, OPEN_PASSWORD, OPEN_BALANCE from OPENBANK
     </select>
 
+    <!-- 한 계좌의 정보 가지고 오기 -->
+    <select id="getAccountInfo" parameterType="String" resultType="com.cruise.project_cruise.dto.develop.OpenBankDTO">
+        select OPEN_ACCOUNT, OPEN_BANK, OPEN_ANAME, OPEN_NAME, OPEN_PASSWORD, OPEN_BALANCE
+        from OPENBANK
+        where OPEN_ACCOUNT = #{account}
+    </select>
+
     <!-- 계좌 등록하기 -->
     <insert id="insertAccount" parameterType="com.cruise.project_cruise.dto.develop.OpenBankDTO">
         insert into openbank
