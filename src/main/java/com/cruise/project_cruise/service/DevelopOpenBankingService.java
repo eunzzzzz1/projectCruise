@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface DevelopOpenBankingService {
     public List<OpenBankDTO> getAccountList() throws Exception;
-    public String getAccountInfo(String account) throws Exception;
+    public OpenBankDTO getAccountInfo(String account) throws Exception;
     public void insertAccount(OpenBankDTO openBankDTO) throws Exception;
     public void updateAccount(OpenBankDTO openBankDTO) throws Exception;
     public void deleteAccount(String account) throws Exception;

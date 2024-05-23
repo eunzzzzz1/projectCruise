@@ -21,7 +21,7 @@ public class DevelopOpenBankingServiceImpl implements DevelopOpenBankingService{
         return developOpenBankingMapper.getAccountList();
     }
 
-    public String getAccountInfo(String account) throws Exception {
+    public OpenBankDTO getAccountInfo(String account) throws Exception {
         return developOpenBankingMapper.getAccountInfo(account);
     }
 

@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 public interface DevelopOpenBankingMapper {
     public List<OpenBankDTO> getAccountList() throws Exception;
-    public String getAccountInfo(@Param("account")String account) throws Exception;
+    public OpenBankDTO getAccountInfo(@Param("account")String account) throws Exception;
     public void insertAccount(OpenBankDTO openBankDTO) throws Exception;
     public void updateAccount(OpenBankDTO openBankDTO) throws Exception;
     public void deleteAccount(@Param("account") String account) throws Exception;
