@@ -110,7 +110,7 @@ public class OpenBankUsingController {
             Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
             Map<String,Object> sumMap = new HashMap<>();
             sumMap.put("account", selectedAccount);
-            sumMap.put("content", content);
+            sumMap.put("searchContent", content);
             sumMap.put("startDate", startDate);
             sumMap.put("endDate", endDate);
             sumMap.put("inMoney",result.get("INMONEY"));
