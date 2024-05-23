@@ -156,7 +156,7 @@ public class DevelopOpenBankUsingServiceImpl implements DevelopOpenBankUsingServ
 
         // 예외처리 (Rollback)
         // 1. 데이터가 없을 경우
-        TransferNoDataException noDataError = new TransferNoDataException("NODATA");
+        TransferNoDataException noDataError = new TransferNoDataException("NO_DATA");
         if(withdrawAccount==null || withdrawAccount.equals("")
                 || withdrawDTO.getOpen_account()==null || withdrawDTO.getOpen_account().equals("")) {
             System.out.println("[OpenBanking] Rollback - 출금계좌 없음.");
@@ -180,7 +180,7 @@ public class DevelopOpenBankUsingServiceImpl implements DevelopOpenBankUsingServ
             throw noDataError;
         }
 
-        TransferMoneyZeroException moneyZeroException = new TransferMoneyZeroException("TRANSFERMONEYZERO");
+        TransferMoneyZeroException moneyZeroException = new TransferMoneyZeroException("TRANSFER_MONEY_ZERO");
         if (transferMoney==0
                 || withdrawDTO.getOpenuse_outmoney()==0 || depositDTO.getOpenuse_inmoney()==0) {
             System.out.println("[OpenBanking] Rollback - 거래금액이 0임");
@@ -192,7 +192,7 @@ public class DevelopOpenBankUsingServiceImpl implements DevelopOpenBankUsingServ
         if(withdrawBalance-transferMoney<0 || updateWithdrawBal<0 || withdrawDTO.getOpenuse_balance()<0) {
             // 잔액부족 오류
             System.out.println("[OpenBanking] Rollback "+ withdrawAccount + " 출금 오류 - 잔액 부족");
-            lackOfBalanceError = new TransferLackOfBalanceException("LACKOFBALANCE");
+            lackOfBalanceError = new TransferLackOfBalanceException("LACK_OF_BALANCE");
             throw lackOfBalanceError;
         }
 
