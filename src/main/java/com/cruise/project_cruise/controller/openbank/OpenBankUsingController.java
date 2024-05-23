@@ -27,8 +27,8 @@ public class OpenBankUsingController {
     private DevelopOpenBankingService developOpenBankingService;
 
 // red 입출금 처리
-    @RequestMapping(value = "/transfer")
-    public String transferProcess(
+    @PostMapping(value = "/transfer")
+    public JSONArray transferProcess(
             @RequestParam("withdrawAccount") String withdrawAccount,
             @RequestParam("depositAccount") String depositAccount,
             @RequestParam("transferDate") String transferDate,
@@ -36,14 +36,32 @@ public class OpenBankUsingController {
             @RequestParam("transferContent") String transferContent
     ) throws Exception {
 
-        String errorMsg = "";
+        String repMessage = "success";
+        OpenBankDTO wdDto = developOpenBankingService.getAccountInfo(withdrawAccount);
+        OpenBankDTO dpsDto = developOpenBankingService.getAccountInfo(depositAccount);
+
+        JSONObject data = new JSONObject();
+
         try {
             developOpenBankUsingService.transferProcess(withdrawAccount,depositAccount,transferDate,transferMoney,transferContent);
+
+            data.put("req_message", repMessage);
+            data.put("wd_account_holder", wdDto.getOpen_aname()); // 송금인 성명
+            data.put("wd_bank_name", wdDto.getOpen_bank()); // 출금 계좌 기관명
+            data.put("wd_account_num", withdrawAccount); // 출금 계좌
+            data.put("dps_account_holder_name", dpsDto.getOpen_bank()); // 송금 계좌 기관명
+            data.put("dps_bank_name", dpsDto.getOpen_bank()); // 송금 계좌 기관명
+            data.put("dps_account_num", depositAccount); // 송금 계좌
+
         } catch (Exception e) {
-            errorMsg = e.getMessage();
+            repMessage = e.getMessage();
+            data.put("req_message", repMessage);
         }
 
-        return errorMsg;
+        JSONArray dataArray = new JSONArray();
+        dataArray.add(data);
+
+        return dataArray;
     }
 
 // red 거래내역 조회
