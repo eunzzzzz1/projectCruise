@@ -58,7 +58,7 @@
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
-          and OPENUSE_CONTENT = #{content}
+          and OPENUSE_CONTENT LIKE '%' || #{content} || '%'
         order by OPENUSE_NUM
     </select>
 
@@ -68,7 +68,7 @@
             OPENUSE_INMONEY, OPENUSE_CONTENT, OPENUSE_BALANCE
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
-          and OPENUSE_CONTENT = #{content}
+          and OPENUSE_CONTENT LIKE '%' || #{content} || '%'
           and OPENUSE_DATE
                 between TO_DATE(#{start_date},'YYYY-MM-DD HH24:MI:SS')
                     and TO_DATE(#{end_date},'YYYY-MM-DD HH24:MI:SS')
@@ -80,7 +80,7 @@
             NVL(SUM(OPENUSE_OUTMONEY),0) AS OUTMONEY, NVL(SUM(OPENUSE_INMONEY),0)  AS INMONEY
         from OPENBANK_USE
         where OPEN_ACCOUNT = #{selectedAccount}
-          and OPENUSE_CONTENT = #{content}
+          and OPENUSE_CONTENT LIKE '%' || #{content} || '%'
           and OPENUSE_DATE
             between TO_DATE(#{start_date},'YYYY-MM-DD HH24:MI:SS')
             and TO_DATE(#{end_date},'YYYY-MM-DD HH24:MI:SS')

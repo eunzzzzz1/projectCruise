@@ -27,23 +27,43 @@ public class OpenBankUsingController {
     private DevelopOpenBankingService developOpenBankingService;
 
 // red 입출금 처리
-    @RequestMapping(value = "/transfer")
-    public String transferProcess(
+    @PostMapping(value = "/transfer")
+    public JSONArray transferProcess(
             @RequestParam("withdrawAccount") String withdrawAccount,
             @RequestParam("depositAccount") String depositAccount,
             @RequestParam("transferDate") String transferDate,
-            @RequestParam("transferMoney") Integer transferMoney,
+            @RequestParam("transferMoney") String transferMoney,
             @RequestParam("transferContent") String transferContent
     ) throws Exception {
 
-        String errorMsg = "";
+        String repMessage = "success";
+        JSONObject data = new JSONObject();
+
         try {
+            OpenBankDTO wdDto = developOpenBankingService.getAccountInfo(withdrawAccount);
+            if(wdDto == null) throw new NoDataException("WITHDRAWAL_ACCOUNT_DOES_NOT_EXIST");
+            OpenBankDTO dpsDto = developOpenBankingService.getAccountInfo(depositAccount);
+            if(dpsDto == null) throw new NoDataException("DEPOSIT_ACCOUNT_DOES_NOT_EXIST");
+
             developOpenBankUsingService.transferProcess(withdrawAccount,depositAccount,transferDate,transferMoney,transferContent);
+
+            data.put("req_message", repMessage);
+            data.put("wd_account_holder_name", wdDto.getOpen_name()); // 송금인 성명
+            data.put("wd_bank_name", wdDto.getOpen_bank()); // 출금 계좌 기관명
+            data.put("wd_account_num", withdrawAccount); // 출금 계좌
+            data.put("dps_account_holder_name", dpsDto.getOpen_name()); // 수취인 성명
+            data.put("dps_bank_name", dpsDto.getOpen_bank()); // 송금 계좌 기관명
+            data.put("dps_account_num", depositAccount); // 송금 계좌
+
         } catch (Exception e) {
-            errorMsg = e.getMessage();
+            repMessage = e.getMessage();
+            data.put("req_message", repMessage);
         }
 
-        return errorMsg;
+        JSONArray dataArray = new JSONArray();
+        dataArray.add(data);
+
+        return dataArray;
     }
 
 // red 거래내역 조회
@@ -107,10 +127,13 @@ public class OpenBankUsingController {
 
         } else if (searchType==4) {
 
+            if(startDate.isEmpty()) throw new NoDataException("NO_STARTDATE_DATA_EXCEPTION");
+            if(endDate.isEmpty()) throw new NoDataException("NO_ENDDATE_DATA_EXCEPTION");
+
             Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
             Map<String,Object> sumMap = new HashMap<>();
             sumMap.put("account", selectedAccount);
-            sumMap.put("content", content);
+            sumMap.put("searchContent", content);
             sumMap.put("startDate", startDate);
             sumMap.put("endDate", endDate);
             sumMap.put("inMoney",result.get("INMONEY"));

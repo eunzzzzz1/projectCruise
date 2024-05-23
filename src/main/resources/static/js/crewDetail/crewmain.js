@@ -261,13 +261,21 @@
         })
 
         transperReq.done(function (result) {
-            if(result==="NODATA"){
-                alert("납입 실패 - 데이터가 입력되지 않았습니다.");
+            var req_msg = result.req_message;
+
+            if (req_msg === "WITHDRAWAL_ACCOUNT_DOES_NOT_EXIST") {
+                alert("납입 실패 - 출금 계좌가 올바르지 않습니다.");
                 return;
-            } else if(result==="LACKOFBALANCE"){
+            } else if (req_msg==="DEPOSIT_ACCOUNT_DOES_NOT_EXIST"){
+                alert("납입 실패 - 입금 계좌가 올바르지 않습니다.");
+                return;
+            } else if (req_msg==="NO_DATA") {
+                alert("납입 실패 - 필요한 데이터가 입력되지 않았습니다.");
+                return;
+            } else if(req_msg==="LACK_OF_BALANCE"){
                 alert("납입 실패 - 출금 계좌의 잔액이 부족합니다.");
                 return;
-            } else if(result=="TRANSFERMONEYZERO"){
+            } else if(req_msg==="TRANSFER_MONEY_ZERO"){
                 alert("납입 실패 - 거래 금액이 0원입니다.");
                 return;
             }
