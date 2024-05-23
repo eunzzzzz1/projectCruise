@@ -107,6 +107,9 @@ public class OpenBankUsingController {
 
         } else if (searchType==4) {
 
+            if(startDate.isEmpty()) throw new NoDataException("NO_STARTDATE_DATA_EXCEPTION");
+            if(endDate.isEmpty()) throw new NoDataException("NO_ENDDATE_DATA_EXCEPTION");
+
             Map<String,Integer> result = developOpenBankUsingService.searchSumForDateAndContent(selectedAccount,startDate,endDate,content);
             Map<String,Object> sumMap = new HashMap<>();
             sumMap.put("account", selectedAccount);
