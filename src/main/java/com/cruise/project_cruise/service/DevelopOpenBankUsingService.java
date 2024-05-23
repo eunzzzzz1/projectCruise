@@ -47,7 +47,7 @@ public interface DevelopOpenBankUsingService {
             @RequestParam("withdrawAccount") String withdrawAccount,
             @RequestParam("depositAccount") String depositAccount,
             @RequestParam("transferDate") String transferDate,
-            @RequestParam("transferMoney") Integer transferMoney,
+            @RequestParam("transferMoney") String transferMoney,
             @RequestParam("transferContent") String transferContent
     ) throws Exception;
 

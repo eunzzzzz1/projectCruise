@@ -32,24 +32,26 @@ public class OpenBankUsingController {
             @RequestParam("withdrawAccount") String withdrawAccount,
             @RequestParam("depositAccount") String depositAccount,
             @RequestParam("transferDate") String transferDate,
-            @RequestParam("transferMoney") Integer transferMoney,
+            @RequestParam("transferMoney") String transferMoney,
             @RequestParam("transferContent") String transferContent
     ) throws Exception {
 
         String repMessage = "success";
-        OpenBankDTO wdDto = developOpenBankingService.getAccountInfo(withdrawAccount);
-        OpenBankDTO dpsDto = developOpenBankingService.getAccountInfo(depositAccount);
-
         JSONObject data = new JSONObject();
 
         try {
+            OpenBankDTO wdDto = developOpenBankingService.getAccountInfo(withdrawAccount);
+            if(wdDto == null) throw new NoDataException("WITHDRAWAL_ACCOUNT_DOES_NOT_EXIST");
+            OpenBankDTO dpsDto = developOpenBankingService.getAccountInfo(depositAccount);
+            if(dpsDto == null) throw new NoDataException("DEPOSIT_ACCOUNT_DOES_NOT_EXIST");
+
             developOpenBankUsingService.transferProcess(withdrawAccount,depositAccount,transferDate,transferMoney,transferContent);
 
             data.put("req_message", repMessage);
-            data.put("wd_account_holder", wdDto.getOpen_aname()); // 송금인 성명
+            data.put("wd_account_holder_name", wdDto.getOpen_name()); // 송금인 성명
             data.put("wd_bank_name", wdDto.getOpen_bank()); // 출금 계좌 기관명
             data.put("wd_account_num", withdrawAccount); // 출금 계좌
-            data.put("dps_account_holder_name", dpsDto.getOpen_bank()); // 송금 계좌 기관명
+            data.put("dps_account_holder_name", dpsDto.getOpen_name()); // 수취인 성명
             data.put("dps_bank_name", dpsDto.getOpen_bank()); // 송금 계좌 기관명
             data.put("dps_account_num", depositAccount); // 송금 계좌
 
