@@ -67,7 +67,7 @@ public class OpenBankUsingController {
     }
 
 // red 거래내역 조회
-    @PostMapping(value = "/search")
+    @PostMapping(value = "/transaction_list")
     @ResponseBody
     public JSONArray searchInquiry(
             @RequestParam("searchType") int searchType,
