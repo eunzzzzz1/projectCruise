@@ -67,7 +67,7 @@ public class OpenBankUsingController {
     }
 
 // red 거래내역 조회
-    @RequestMapping(value = "/search")
+    @PostMapping(value = "/search")
     @ResponseBody
     public JSONArray searchInquiry(
             @RequestParam("searchType") int searchType,
@@ -147,7 +147,7 @@ public class OpenBankUsingController {
     }
 
 // red 잔액 조회
-    @RequestMapping(value = "/balance")
+    @PostMapping(value = "/balance")
     @ResponseBody
     public JSONObject getAccountBalance(@RequestParam("account_num") String account_num) throws Exception {
         HashMap<String, Object> map = new HashMap<>();
