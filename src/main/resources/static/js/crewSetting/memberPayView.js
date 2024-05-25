@@ -86,7 +86,7 @@ var crewAccount = document.getElementById('crewAccountHidden').value;
                 console.log(crewAccount);
 
                 var inquieyReq = $.ajax({
-                    url: "/develop/openbank/using/search",
+                    url: "/develop/openbank/using/transaction_list",
                     method: "POST",
                     data: {
                         searchType:4,

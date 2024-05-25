@@ -2,7 +2,7 @@
 var accountHistoryTbody = document.getElementById('accountHistoryTbody');
 var crewAccount = document.getElementById('crewAccount').value;
 var inquiryReq = $.ajax({
-    url: "/develop/openbank/using/search",
+    url: "/develop/openbank/using/transaction_list",
     method: "POST",
     data: {
         searchType:0,
